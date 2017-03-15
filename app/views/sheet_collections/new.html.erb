@@ -1,0 +1,19 @@
+<h1>Sheet Collection - <%= @customer.name %></h1>
+
+<%= form_for @sheet_collection, url: customer_sheet_collections_path(@customer), method: :post do |f| %>
+  <%= f.label :date_collected %>
+  <%= f.date_field :date_collected %><br/>
+
+  <!-- Fields for may need to be contained within a @sheet_collection_items.each do... -->
+  <%= f.fields_for @sheet_collection_items do |ff| %>
+    <%= label_tag "#{paper_type.name} #{paper_type.size}" %>
+    <%= number_field_tag :quantity_collected %><br/>
+  <% end %>
+
+  <%= f.submit 'Submit' %>
+<% end %>
+
+<% paper_types.each do |paper_type| %>
+  <%= label_tag "#{paper_type.name} #{paper_type.size}" %>
+  <%= number_field_tag :quantity_collected %><br/>
+<% end %>
