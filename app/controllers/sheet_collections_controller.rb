@@ -14,6 +14,16 @@ class SheetCollectionsController < ApplicationController
   end
 
   def create
-    @customer = Customer.find(params[:customer_id])
+    if SheetCollection.create(sheet_collection_params)
+      render plain: 'Yay!'
+    else
+      render plain: 'Oh no!'
+    end
+  end
+
+  private
+
+  def sheet_collection_params
+    params.require(:sheet_collection).permit(:date_collected, sheet_collection_items_attributes: [:quantity_collected, :sheet_id])
   end
 end
