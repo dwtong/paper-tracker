@@ -1,5 +1,6 @@
 class SheetCollectionsController < ApplicationController
   def index
+    @customer = Customer.find(params[:customer_id])
   end
 
   def show
@@ -15,7 +16,7 @@ class SheetCollectionsController < ApplicationController
 
   def create
     if SheetCollection.create(sheet_collection_params)
-      render plain: 'Yay!'
+      redirect_to action: 'index'
     else
       render plain: 'Oh no!'
     end

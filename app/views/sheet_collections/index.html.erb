@@ -1,1 +1,16 @@
-<h1>sheet_collections#index</h1>
+<h1><%= @customer.name.titleize %></h1>
+
+<h3>Total Stock</h3>
+<table>
+  <thead>
+
+  </thead>
+  <tbody>
+    <% @customer.sheets.each do |sheet| %>
+    <tr>
+      <td style="width: 200px"><%= render_paper_type(sheet.paper_type) %></td>
+      <td><%= sheet.quantity_in_stock %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

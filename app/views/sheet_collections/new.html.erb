@@ -6,6 +6,7 @@
 
   <%= f.fields_for :sheet_collection_items do |ff| %>
     <%= ff.hidden_field :sheet_id %>
+    <%= render_paper_type(ff.object.sheet.paper_type) %>
     <%= ff.number_field :quantity_collected %><br/>
   <% end %>
 
