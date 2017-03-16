@@ -14,3 +14,19 @@
     <% end %>
   </tbody>
 </table>
+
+<h3>Sheet Collections</h3>
+<% @customer.sheet_collections.distinct.each do |collection| %>
+  <h4>Collection on <%= collection.date_collected.to_date %></h4>
+  <table>
+    <tbody>
+      <% collection.sheet_collection_items.each do |item| %>
+      <tr>
+        <td style="width: 200px"><%= render_paper_type(item.sheet.paper_type) %></td>
+        <td><%= item.quantity_collected %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br/>
+<% end %>
