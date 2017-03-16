@@ -3,5 +3,5 @@ class Customer < ApplicationRecord
   validates_presence_of :name
   has_many :sheets
   has_many :sheet_collection_items, through: :sheets
-  has_many :sheet_collections, through: :sheet_collection_items
+  has_many :sheet_collections, -> { distinct }, through: :sheet_collection_items
 end

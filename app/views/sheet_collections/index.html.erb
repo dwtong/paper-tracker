@@ -16,7 +16,7 @@
 </table>
 
 <h3>Sheet Collections</h3>
-<% @customer.sheet_collections.distinct.each do |collection| %>
+<% @customer.sheet_collections.each do |collection| %>
   <h4>Collection on <%= collection.date_collected.to_date %></h4>
   <table>
     <tbody>
