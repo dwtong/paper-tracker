@@ -1,14 +1,23 @@
 <h1>Paper Collection - <%= @customer.name %></h1>
 
-<%= form_for @paper_collection, url: customer_paper_collections_path(@customer), method: :post do |f| %>
-  <%= f.label :date_collected %>
-  <%= f.date_field :date_collected, value: Time.now.strftime('%Y-%m-%d') %><br/>
+<div class="row">
+  <div class="col-5">
+    <%= form_for @paper_collection, url: customer_paper_collections_path(@customer), method: :post, class: 'form-inline' do |f| %>
+    <div class="form-group">
+      <%= f.label :date_collected %>
+      <%= f.date_field :date_collected, value: Time.now.strftime('%Y-%m-%d'), class: 'form-control' %><br/>
+    </div>
 
-  <%= f.fields_for :paper_collection_items do |ff| %>
+    <%= f.fields_for :paper_collection_items do |ff| %>
     <%= ff.hidden_field :sheet_id %>
-    <%= ff.object.sheet.paper_type.label %>
-    <%= ff.number_field :quantity_collected %><br/>
-  <% end %>
 
-  <%= f.submit 'Submit' %>
-<% end %>
+    <div class="form-group">
+      <%= ff.object.sheet.paper_type.label %>
+      <%= ff.number_field :quantity_collected, class: 'form-control' %><br/>
+    </div>
+    <% end %>
+
+    <%= f.submit 'Submit', class: 'btn btn-success' %>
+    <% end %>
+  </div>
+</div>

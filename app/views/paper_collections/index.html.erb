@@ -1,23 +1,32 @@
 <h1><%= @customer.name.titleize %></h1>
 
 <h3>Total Stock</h3>
-<table>
-  <thead>
+<div class="row">
+  <div class="col">
 
-  </thead>
-  <tbody>
-    <% @customer.sheets.each do |sheet| %>
-    <tr>
-      <td style="width: 200px"><%= sheet.paper_type.label %></td>
-      <td><%= sheet.quantity_in_stock %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+  <table>
+    <thead>
 
-<h3>Paper Collections</h3>
-<% @customer.paper_collections.each do |collection| %>
-  <h4>Collection on <%= collection.date_collected.to_date %></h4>
+    </thead>
+    <tbody>
+      <% @customer.sheets.each do |sheet| %>
+      <tr>
+        <td style="width: 200px"><%= sheet.paper_type.label %></td>
+        <td><%= sheet.quantity_in_stock %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<h3 class="mt-5">Paper Collections</h3>
+<div class="row">
+
+  <% @customer.paper_collections.each do |collection| %>
+  <div class="col-12 mt-3">
+
+  <h4><%= collection.date_collected.strftime('%d %B %Y') %></h4>
   <table>
     <tbody>
       <% collection.paper_collection_items.each do |item| %>
@@ -29,4 +38,6 @@
     </tbody>
   </table>
   <br/>
-<% end %>
+  </div>
+  <% end %>
+</div>
