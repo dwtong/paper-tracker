@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20170315055646) do
 
   create_table "paper_types", force: :cascade do |t|
     t.string   "name",       null: false
-    t.string   "size",       null: false
+    t.integer  "size",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name", "size"], name: "index_paper_types_on_name_and_size", unique: true, using: :btree
