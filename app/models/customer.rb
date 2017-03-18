@@ -1,5 +1,5 @@
 class Customer < ApplicationRecord
-  enum kind: [ :ecolooper, :offsetter, :buyer ]
+  enum kind: { ecolooper: 0, offsetter: 1, buyer: 2 }
   validates_presence_of :name
   has_many :sheets
   has_many :paper_collection_items, through: :sheets
