@@ -23,22 +23,24 @@ ActiveRecord::Schema.define(version: 20170315055646) do
   end
 
   create_table "paper_collection_items", force: :cascade do |t|
-    t.integer  "sheet_id",            null: false
-    t.integer  "paper_collection_id", null: false
-    t.integer  "quantity_collected",  null: false
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.integer  "sheet_id"
+    t.integer  "paper_collection_id"
+    t.integer  "quantity_collected",  default: 0, null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.index ["paper_collection_id"], name: "index_paper_collection_items_on_paper_collection_id", using: :btree
+    t.index ["sheet_id"], name: "index_paper_collection_items_on_sheet_id", using: :btree
   end
 
   create_table "paper_collections", force: :cascade do |t|
-    t.datetime "date_collected", null: false
+    t.date     "date_collected", null: false
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end
 
   create_table "paper_types", force: :cascade do |t|
     t.string   "name",       null: false
-    t.integer  "size",       null: false
+    t.string   "size",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name", "size"], name: "index_paper_types_on_name_and_size", unique: true, using: :btree
@@ -46,9 +48,11 @@ ActiveRecord::Schema.define(version: 20170315055646) do
 
   create_table "sheets", force: :cascade do |t|
     t.integer  "customer_id"
-    t.integer  "paper_type_id", null: false
+    t.integer  "paper_type_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.index ["customer_id"], name: "index_sheets_on_customer_id", using: :btree
+    t.index ["paper_type_id"], name: "index_sheets_on_paper_type_id", using: :btree
   end
 
 end
