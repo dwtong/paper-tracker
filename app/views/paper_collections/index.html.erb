@@ -20,11 +20,16 @@
   </div>
 </div>
 
-<h3 class="mt-5">Paper Collections</h3>
+<div class="row mt-5 mb-3">
+  <div class="col">
+    <h3>Paper Collections</h3>
+    <%= button_to 'Add Collection', new_customer_paper_collection_path, method: :get, class: 'btn btn-success mt-3' %>
+  </div>
+</div>
 <div class="row">
 
   <% @customer.paper_collections.each do |collection| %>
-  <div class="col-12 mt-3">
+  <div class="col-4 mt-3">
 
   <h4><%= collection.date_collected.strftime('%d %B %Y') %></h4>
   <table>
