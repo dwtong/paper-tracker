@@ -6,7 +6,7 @@
   <tbody>
     <% @customers.each do |customer| %>
       <tr>
-        <td><%= link_to customer.name, customer %></td>
+        <td><%= link_to customer.name, customer_paper_collections_path(customer) %></td>
       </tr>
     <% end %>
     <tr>

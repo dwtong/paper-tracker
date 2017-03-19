@@ -2,22 +2,31 @@
 
 <div class="row">
   <div class="col-5">
-    <%= form_for @paper_collection, url: customer_paper_collections_path(@customer), method: :post, class: 'form-inline' do |f| %>
-    <div class="form-group">
-      <%= f.label :date_collected %>
-      <%= f.date_field :date_collected, value: Time.now.strftime('%Y-%m-%d'), class: 'form-control' %><br/>
+    <%= form_for @paper_collection, url: customer_paper_collections_path(@customer), method: :post do |f| %>
+    <div class="form-group row">
+      <%= f.label :date_collected, class: 'col-sm-5 col-form-label' %>
+      <div class="col-sm-5">
+        <%= f.date_field :date_collected, value: Time.now.strftime('%Y-%m-%d'), class: 'form-control' %><br/>
+      </div>
     </div>
 
     <%= f.fields_for :paper_collection_items do |ff| %>
     <%= ff.hidden_field :sheet_id %>
 
-    <div class="form-group">
-      <%= ff.object.sheet.paper_type.label %>
-      <%= ff.number_field :quantity_collected, class: 'form-control' %><br/>
+    <div class="form-group row">
+      <%= label :quantity_collected, ff.object.sheet.paper_type.label, class: 'col-sm-5 col-form-label' %>
+      <div class="col-sm-3">
+        <%= ff.number_field :quantity_collected, class: 'form-control' %>
+      </div>
     </div>
     <% end %>
 
-    <%= f.submit 'Submit', class: 'btn btn-success' %>
+    <div class="form-group row ">
+      <div class="col">
+        <%= button_to 'Back', customer_paper_collections_path(@customer), class: 'btn btn-secondary mr-2' %>
+        <%= f.submit 'Submit', class: 'btn btn-success' %>
+      </div>
+    </div>
     <% end %>
   </div>
 </div>
