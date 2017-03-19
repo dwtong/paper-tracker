@@ -10,14 +10,18 @@
       </ul>
     </div>
   <% end %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
 
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+  <div class="form-group">
+    <%= f.label :kind %>
+    <%= f.select :kind, Customer.kinds.keys.to_a, {}, { class: 'form-control' } %>
+  </div>
 
-  <%= f.label :kind %>
-  <%= f.select :kind, Customer.kinds.keys.to_a %>
-
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+    <%= link_to 'Back', customers_path, class: 'btn btn-secondary mr-2' %>
+    <%= f.submit 'Submit', class: 'btn btn-success' %>
   </div>
 <% end %>

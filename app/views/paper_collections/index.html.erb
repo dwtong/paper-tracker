@@ -15,23 +15,24 @@
 </div>
 
 <div class="row">
-  <table class="table">
-    <thead>
-      <th>Date</th>
-      <% PaperType.all.order(:size, :name).each do |type| %>
-      <th><%= type.label %></th>
-      <% end %>
-    </thead>
-    <tbody>
-      <% @customer.paper_collections.each do |collection| %>
-      <tr>
-        <td><%= collection.date_collected.strftime('%d %B %Y') %></td>
-        <% collection.paper_collection_items.by_paper_type.each do |item| %>
-        <td><%= item.quantity_collected %></td>
+  <div class="col">
+    <table class="table">
+      <thead>
+        <th>Date</th>
+        <% PaperType.all.order(:size, :name).each do |type| %>
+        <th><%= type.label %></th>
         <% end %>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-
+      </thead>
+      <tbody>
+        <% @customer.paper_collections.each do |collection| %>
+        <tr>
+          <td><%= collection.date_collected.strftime('%d %B %Y') %></td>
+          <% collection.paper_collection_items.by_paper_type.each do |item| %>
+          <td><%= item.quantity_collected %></td>
+          <% end %>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
