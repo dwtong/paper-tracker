@@ -22,6 +22,9 @@ class PaperCollectionsController < ApplicationController
     end
   end
 
+  def choose_customer
+  end
+
   private
 
   def paper_collection_params
