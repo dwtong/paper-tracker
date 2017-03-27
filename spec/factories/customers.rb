@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :customer do
     name "MyString"
-    kind "MyString"
+    customer_type "MyString"
   end
 end

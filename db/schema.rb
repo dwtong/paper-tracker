@@ -22,15 +22,16 @@ ActiveRecord::Schema.define(version: 20170327033856) do
   end
 
   create_table "customers", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.integer  "kind",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",          null: false
+    t.integer  "customer_type", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "paper_transactions", force: :cascade do |t|
     t.integer  "paper_id"
     t.integer  "quantity",          default: 0, null: false
+    t.integer  "stock_type",                    null: false
     t.string   "transactable_type"
     t.integer  "transactable_id"
     t.datetime "created_at",                    null: false
@@ -48,11 +49,10 @@ ActiveRecord::Schema.define(version: 20170327033856) do
   end
 
   create_table "papers", force: :cascade do |t|
-    t.boolean  "reserved_for_ecoloop", default: false, null: false
     t.integer  "customer_id"
     t.integer  "paper_type_id"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.index ["customer_id"], name: "index_papers_on_customer_id", using: :btree
     t.index ["paper_type_id"], name: "index_papers_on_paper_type_id", using: :btree
   end

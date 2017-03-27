@@ -12,7 +12,7 @@
   <div class="col-4">
     <h2>Ecoloopers</h2>
     <ul class="list-group">
-      <% @customers.where(kind: :ecolooper).each do |customer| %>
+      <% @customers.where(customer_type: :ecolooper).each do |customer| %>
         <%= link_to customer_collections_path(customer) do %>
           <li class="list-group-item mb-2"><%= customer.name %></li>
         <% end %>
@@ -22,7 +22,7 @@
   <div class="col-4">
     <h2>Offsetters</h2>
     <ul class="list-group">
-      <% @customers.where(kind: :offsetter).each do |customer| %>
+      <% @customers.where(customer_type: :offsetter).each do |customer| %>
       <%= link_to customer_collections_path(customer) do %>
         <li class="list-group-item mb-2"><%= customer.name %></li>
       <% end %>      <% end %>
@@ -31,7 +31,7 @@
   <div class="col-4">
     <h2>Buyers</h2>
     <ul class="list-group">
-      <% @customers.where(kind: :buyer).each do |customer| %>
+      <% @customers.where(customer_type: :buyer).each do |customer| %>
       <%= link_to customer_collections_path(customer) do %>
         <li class="list-group-item mb-2"><%= customer.name %></li>
       <% end %>

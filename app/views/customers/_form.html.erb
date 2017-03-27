@@ -16,8 +16,8 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :kind %>
-    <%= f.select :kind, Customer.kinds.keys.to_a, {}, { class: 'form-control' } %>
+    <%= f.label :customer_type %>
+    <%= f.select :customer_type, Customer.customer_types.keys.to_a, {}, { class: 'form-control' } %>
   </div>
 
   <div class="form-group">
