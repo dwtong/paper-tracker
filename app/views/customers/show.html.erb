@@ -6,8 +6,8 @@
 <h3>Total Stock</h3>
 <div class="row">
   <div class="col-6">
-  <%= render 'paper_collections/quantity_in_stock' %>
+  <%= render 'collections/quantity_in_stock' %>
   </div>
 </div>
-<%= link_to 'View Paper Collections', customer_paper_collections_path(@customer), method: :get %><br/>
-<%= link_to 'New Paper Collection', new_customer_paper_collection_path(@customer), method: :get %><br/>
+<%= link_to 'New Paper Collection', new_customer_collection_path(@customer), method: :get %><br/>
+<%= link_to 'View Paper Collections', customer_collections_path(@customer), method: :get %><br/>

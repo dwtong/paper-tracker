@@ -1,0 +1,32 @@
+<h1>Paper Collection - <%= @customer.name %></h1>
+
+<div class="row">
+  <div class="col-5">
+    <%= form_for @collection, url: customer_collections_path(@customer), method: :post do |f| %>
+    <div class="form-group row">
+      <%= f.label :collected_on, class: 'col-sm-5 col-form-label' %>
+      <div class="col-sm-5">
+        <%= f.date_field :collected_on, value: Time.now.strftime('%Y-%m-%d'), class: 'form-control' %><br/>
+      </div>
+    </div>
+
+    <%= f.fields_for :paper_transactions, @collection_items do |ff| %>
+    <%= ff.hidden_field :paper_id %>
+
+    <div class="form-group row">
+      <%= label :quantity, "#{ff.object.paper.paper_type.label} #{' (ecoloop)' if ff.object.paper.reserved_for_ecoloop}", class: 'col-sm-5 col-form-label' %>
+      <div class="col-sm-3">
+        <%= ff.number_field :quantity, class: 'form-control' %>
+      </div>
+    </div>
+    <% end %>
+
+    <div class="form-group row ">
+      <div class="col">
+        <%= button_to 'Back', customer_collections_path(@customer), class: 'btn btn-secondary mr-2' %>
+        <%= f.submit 'Submit', class: 'btn btn-success' %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

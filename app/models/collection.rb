@@ -1,0 +1,6 @@
+class Collection < ApplicationRecord
+  has_many :paper_transactions, as: :transactable, dependent: :destroy
+  # has_many :papers, through: :paper_transactions
+  accepts_nested_attributes_for :paper_transactions
+  validates_presence_of :collected_on
+end

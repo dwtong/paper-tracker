@@ -1,5 +1,5 @@
 class PaperType < ApplicationRecord
-  has_many :sheets
+  has_many :papers
   validates_uniqueness_of :name, scope: :size
 
   def label

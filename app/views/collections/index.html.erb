@@ -3,16 +3,16 @@
 <h3>Total Stock</h3>
 <div class="row">
   <div class="col-6">
-  <%= render 'paper_collections/quantity_in_stock' %>
+  <%= render 'collections/quantity_in_stock' %>
   </div>
 </div>
 
 <div class="row mt-5 mb-3">
   <div class="col">
-    <h3>Paper Collections</h3>
+    <h3>Box Collections</h3>
   </div>
   <div class="float-right">
-    <%= button_to 'New Paper Collection', new_customer_paper_collection_path, method: :get, class: 'btn btn-success' %>
+    <%= button_to 'New Box Collection', new_customer_collection_path, method: :get, class: 'btn btn-success' %>
   </div>
 </div>
 
@@ -26,11 +26,11 @@
         <% end %>
       </thead>
       <tbody>
-        <% @customer.paper_collections.each do |collection| %>
+        <% @customer.collections.each do |collection| %>
         <tr>
-          <td><%= collection.date_collected.strftime('%d %B %Y') %></td>
-          <% collection.paper_collection_items.by_paper_type.each do |item| %>
-          <td><%= item.quantity_collected %></td>
+          <td><%= collection.collected_on.strftime('%d %B %Y') %></td>
+          <% collection.paper_transactions.by_paper_type.each do |item| %>
+          <td><%= item.quantity %></td>
           <% end %>
         </tr>
         <% end %>
