@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170315055646) do
+ActiveRecord::Schema.define(version: 20170327033856) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "collections", force: :cascade do |t|
+    t.date     "collected_on", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
   create_table "customers", force: :cascade do |t|
     t.string   "name",       null: false
@@ -22,20 +28,15 @@ ActiveRecord::Schema.define(version: 20170315055646) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "paper_collection_items", force: :cascade do |t|
-    t.integer  "sheet_id"
-    t.integer  "paper_collection_id"
-    t.integer  "quantity_collected",  default: 0, null: false
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-    t.index ["paper_collection_id"], name: "index_paper_collection_items_on_paper_collection_id", using: :btree
-    t.index ["sheet_id"], name: "index_paper_collection_items_on_sheet_id", using: :btree
-  end
-
-  create_table "paper_collections", force: :cascade do |t|
-    t.date     "date_collected", null: false
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+  create_table "paper_transactions", force: :cascade do |t|
+    t.integer  "paper_id"
+    t.integer  "quantity",          default: 0, null: false
+    t.string   "transactable_type"
+    t.integer  "transactable_id"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.index ["paper_id"], name: "index_paper_transactions_on_paper_id", using: :btree
+    t.index ["transactable_type", "transactable_id"], name: "by_transactable_type_and_id", using: :btree
   end
 
   create_table "paper_types", force: :cascade do |t|
@@ -46,13 +47,20 @@ ActiveRecord::Schema.define(version: 20170315055646) do
     t.index ["name", "size"], name: "index_paper_types_on_name_and_size", unique: true, using: :btree
   end
 
-  create_table "sheets", force: :cascade do |t|
+  create_table "papers", force: :cascade do |t|
+    t.boolean  "reserved_for_ecoloop", default: false, null: false
     t.integer  "customer_id"
     t.integer  "paper_type_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.index ["customer_id"], name: "index_sheets_on_customer_id", using: :btree
-    t.index ["paper_type_id"], name: "index_sheets_on_paper_type_id", using: :btree
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.index ["customer_id"], name: "index_papers_on_customer_id", using: :btree
+    t.index ["paper_type_id"], name: "index_papers_on_paper_type_id", using: :btree
+  end
+
+  create_table "transfers", force: :cascade do |t|
+    t.date     "transferred_on", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
 end
