@@ -10,15 +10,28 @@
       </div>
     </div>
 
-    <%= f.fields_for :paper_transactions, @collection_items do |ff| %>
+    <%= f.fields_for :paper_transactions do |ff| %>
     <%= ff.hidden_field :paper_id %>
 
     <div class="form-group row">
-      <%= label :quantity, "#{ff.object.paper.paper_type.label} #{' (ecoloop)' if ff.object.paper.reserved_for_ecoloop}", class: 'col-sm-5 col-form-label' %>
+      <%= label :quantity, ff.object.paper.paper_type.label, class: 'col-sm-5 col-form-label' %>
       <div class="col-sm-3">
         <%= ff.number_field :quantity, class: 'form-control' %>
       </div>
     </div>
+    <% end %>
+
+    <% if @customer.ecolooper? %>
+      <div class="form-group row">
+        <div class="col">
+          <div class="form-check">
+            <label>
+              <%= check_box_tag 'donate_to_offset', true, nil, class: 'form-check-input' %>
+              Donate this collection to Offset
+            </label>
+          </div>
+        </div>
+      </div>
     <% end %>
 
     <div class="form-group row ">

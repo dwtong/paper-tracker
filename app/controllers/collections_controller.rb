@@ -9,13 +9,17 @@ class CollectionsController < ApplicationController
   def new
     @customer = Customer.find(params[:customer_id])
     @collection = Collection.new
-    @collection_items = @customer.papers.where(reserved_for_ecoloop: false).collect do |paper|
+    @paper_transactions = @customer.papers.collect do |paper|
       @collection.paper_transactions.new(paper: paper)
     end
   end
 
   def create
-    if Collection.create(collection_params)
+    stock_type = params[:donate_to_offset].blank? ? :offsetted : :ecolooped
+    @collection = Collection.new(collection_params)
+    @collection.paper_transactions.each { |pt| pt.assign_attributes(stock_type: stock_type) }
+
+    if @collection.save
       redirect_to action: 'index'
     else
       render plain: 'Oh no!'
