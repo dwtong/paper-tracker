@@ -12,7 +12,7 @@
     <h3>Box Collections</h3>
   </div>
   <div class="float-right">
-    <%= button_to 'New Box Collection', new_customer_collection_path, method: :get, class: 'btn btn-success' %>
+    <%= link_to 'New Box Collection', new_customer_collection_path, method: :get, class: 'btn btn-success' %>
   </div>
 </div>
 
@@ -21,6 +21,7 @@
     <table class="table">
       <thead>
         <th>Date</th>
+        <th>Type</th>
         <% PaperType.all.order(:size, :name).each do |type| %>
         <th><%= type.label %></th>
         <% end %>
@@ -29,8 +30,9 @@
         <% @customer.collections.each do |collection| %>
         <tr>
           <td><%= collection.collected_on.strftime('%d %B %Y') %></td>
-          <% collection.paper_transactions.by_paper_type.each do |item| %>
-          <td><%= item.quantity %></td>
+          <td><%= collection.paper_transactions.first.ecoloop_stock? ? 'Ecoloop' : 'Offset' %></td>
+          <% PaperType.all.order(:size, :name).each do |paper_type| %>
+              <td><%= collection_quantity_from_type(collection, paper_type) %></td>
           <% end %>
         </tr>
         <% end %>

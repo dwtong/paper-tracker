@@ -30,12 +30,12 @@ ActiveRecord::Schema.define(version: 20170327033856) do
 
   create_table "paper_transactions", force: :cascade do |t|
     t.integer  "paper_id"
-    t.integer  "quantity",          default: 0, null: false
-    t.integer  "stock_type",                    null: false
+    t.integer  "quantity",          default: 0,     null: false
+    t.boolean  "ecoloop_stock",     default: false, null: false
     t.string   "transactable_type"
     t.integer  "transactable_id"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.index ["paper_id"], name: "index_paper_transactions_on_paper_id", using: :btree
     t.index ["transactable_type", "transactable_id"], name: "by_transactable_type_and_id", using: :btree
   end
