@@ -15,9 +15,10 @@ class CollectionsController < ApplicationController
   end
 
   def create
-    stock_type = params[:donate_to_offset].blank? ? :offsetted : :ecolooped
     @collection = Collection.new(collection_params)
-    @collection.paper_transactions.each { |pt| pt.assign_attributes(stock_type: stock_type) }
+    @customer = Customer.find(customer_params)
+    ecoloop_stock = params[:donate_to_offset].blank? && @customer.ecolooper?
+    @collection.paper_transactions.each { |pt| pt.assign_attributes(ecoloop_stock: ecoloop_stock) }
 
     if @collection.save
       redirect_to action: 'index'
@@ -33,5 +34,9 @@ class CollectionsController < ApplicationController
 
   def collection_params
     params.require(:collection).permit(:collected_on, paper_transactions_attributes: [:quantity, :paper_id])
+  end
+
+  def customer_params
+    params.require(:customer_id)
   end
 end
