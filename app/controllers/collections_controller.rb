@@ -1,12 +1,18 @@
 class CollectionsController < ApplicationController
   def index
-    @customer = Customer.find(params[:customer_id])
+    if params[:customer_id]
+      @customer = Customer.find(params[:customer_id])
+      @collections = @customer.collections
+    else
+      @collections = Collection.all
+    end
   end
 
   def show
   end
 
   def new
+    render 'choose_customer' and return unless params[:customer_id]
     @customer = Customer.find(params[:customer_id])
     @collection = Collection.new
     @paper_transactions = @customer.papers.collect do |paper|

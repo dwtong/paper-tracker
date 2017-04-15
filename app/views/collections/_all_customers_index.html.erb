@@ -1,0 +1,39 @@
+<h1><%= @customer.name.titleize if @customer %></h1>
+
+<div class="row mt-5 mb-3">
+  <div class="col">
+    <h3>Box Collections</h3>
+  </div>
+  <div class="float-right">
+    <%= link_to 'New Box Collection', new_collection_path, method: :get, class: 'btn btn-success' %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <table class="table">
+      <thead>
+        <th>Date</th>
+        <th><%= @customer.nil? ? 'Customer' : 'Type' %></th>
+        <% PaperType.all.order(:size, :name).each do |type| %>
+        <th><%= type.label %></th>
+        <% end %>
+      </thead>
+      <tbody>
+        <% @collections.each do |collection| %>
+        <tr>
+          <td><%= collection.collected_on.strftime('%d %B %Y') %></td>
+          <% if @customer.nil? %>
+            <td><%= collection.customer.name %></td>
+          <% else %>
+            <td><%= collection.paper_transactions.first.ecoloop_stock? ? 'Ecoloop' : 'Offset' %></td>
+          <% end %>
+          <% PaperType.all.order(:size, :name).each do |paper_type| %>
+              <td><%= collection_quantity_from_type(collection, paper_type) %></td>
+          <% end %>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

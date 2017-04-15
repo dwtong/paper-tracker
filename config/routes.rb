@@ -3,5 +3,5 @@ Rails.application.routes.draw do
     resources :collections
   end
 
-  get '/collections/choose_customer', to: 'collections#choose_customer', as: :choose_customer
+  resources :collections
 end
