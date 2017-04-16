@@ -13,6 +13,7 @@ class CollectionsController < ApplicationController
 
   def new
     render 'choose_customer' and return unless params[:customer_id]
+
     @customer = Customer.find(params[:customer_id])
     @collection = Collection.new
     @paper_transactions = @customer.papers.collect do |paper|
@@ -31,9 +32,6 @@ class CollectionsController < ApplicationController
     else
       render plain: 'Oh no!'
     end
-  end
-
-  def choose_customer
   end
 
   private

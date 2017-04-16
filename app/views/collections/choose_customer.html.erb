@@ -1,7 +1,9 @@
 <div class="row">
   <div class="col-5">
     <%= form_tag do %>
-      <%= select_tag :customer_id, options_from_collection_for_select(Customer.all, :id, :name), class: 'form-control' %>
+      <div class="form-group">
+        <%= select_tag :customer_id, options_from_collection_for_select(Customer.all, :id, :name), prompt: 'Select customer...', class: 'js-choose-customer form-control form-control form-control-lg' %>
+      </div>
     <% end %>
   </div>
 </div>
