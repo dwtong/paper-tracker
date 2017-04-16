@@ -2,9 +2,9 @@ class CollectionsController < ApplicationController
   def index
     if params[:customer_id]
       @customer = Customer.find(params[:customer_id])
-      @collections = @customer.collections
+      @collections = @customer.collections.order(collected_on: :desc)
     else
-      @collections = Collection.all
+      @collections = Collection.all.order(collected_on: :desc)
     end
   end
 

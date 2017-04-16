@@ -25,7 +25,7 @@
         <% end %>
       </thead>
       <tbody>
-        <% @customer.collections.each do |collection| %>
+        <% @collections.each do |collection| %>
         <tr>
           <td><%= collection.collected_on.strftime('%d %B %Y') %></td>
           <td><%= collection.paper_transactions.first.ecoloop_stock? ? 'Ecoloop' : 'Offset' %></td>
