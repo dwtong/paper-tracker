@@ -11,8 +11,8 @@
       <% PaperType.all.select(:name).distinct.pluck(:name).each do |name| %>
       <tr>
         <td><%= name.titleize %></td>
-        <td><%= @customer.papers.quantity_by_type(name, 'A4', quantity_by) %></td>
-        <td><%= @customer.papers.quantity_by_type(name, 'A3', quantity_by) %></td>
+        <td><%# @customer.papers.quantity_by_type(name, 'A4', quantity_by) %></td>
+        <td><%# @customer.papers.quantity_by_type(name, 'A3', quantity_by) %></td>
       </tr>
       <% end %>
     </tbody>
