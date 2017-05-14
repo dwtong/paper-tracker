@@ -4,16 +4,15 @@ class Paper < ApplicationRecord
   has_many :paper_transactions
   # has_many :collections, through: :paper_transactions
 
-  scope :quantity_by_type, -> (name, size, quantity) { joins(:paper_type).find_by(paper_types: {name: name, size: size}).quantity(quantity) }
+  scope :offset_by_type, -> (name, size) { joins(:paper_type).find_by(paper_types: {name: name, size: size}).offset_quantity }
+  scope :ecoloop_by_type, -> (name, size) { joins(:paper_type).find_by(paper_types: {name: name, size: size}).ecoloop_quantity }
+  scope :excluding_rejects, -> { joins(:paper_type).where.not(paper_types: { name: 'reject' }) }
 
-  def quantity(by_type = nil)
-    case by_type
-    when :ecoloop
-      paper_transactions.where(ecoloop_stock: true).sum(:quantity)
-    when :offset
-      paper_transactions.where(ecoloop_stock: false).sum(:quantity)
-    else
-      paper_transactions.sum(:quantity)
-    end
+  def ecoloop_quantity
+    paper_transactions.where(ecoloop_stock: true).sum(:quantity)
+  end
+
+  def offset_quantity
+    paper_transactions.where(ecoloop_stock: false).sum(:quantity)
   end
 end
