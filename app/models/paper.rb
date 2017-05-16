@@ -1,7 +1,7 @@
 class Paper < ApplicationRecord
   belongs_to :customer
   belongs_to :paper_type
-  has_many :paper_transactions
+  has_many :paper_transactions, dependent: :destroy
   # has_many :collections, through: :paper_transactions
 
   scope :offset_by_type, -> (name, size) { joins(:paper_type).find_by(paper_types: {name: name, size: size}).offset_quantity }
