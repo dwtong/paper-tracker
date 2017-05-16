@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170327033856) do
+ActiveRecord::Schema.define(version: 20170516030710) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "books", force: :cascade do |t|
+    t.string   "binding"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "collections", force: :cascade do |t|
     t.date     "collected_on", null: false
@@ -26,6 +32,34 @@ ActiveRecord::Schema.define(version: 20170327033856) do
     t.integer  "customer_type", null: false
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.integer  "order_id"
+    t.integer  "book_id"
+    t.integer  "quantity",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_order_items_on_book_id", using: :btree
+    t.index ["order_id"], name: "index_order_items_on_order_id", using: :btree
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.date     "ordered_on",  null: false
+    t.integer  "customer_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["customer_id"], name: "index_orders_on_customer_id", using: :btree
+  end
+
+  create_table "pages", force: :cascade do |t|
+    t.integer  "paper_type_id"
+    t.integer  "book_id"
+    t.integer  "quantity"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["book_id"], name: "index_pages_on_book_id", using: :btree
+    t.index ["paper_type_id"], name: "index_pages_on_paper_type_id", using: :btree
   end
 
   create_table "paper_transactions", force: :cascade do |t|
