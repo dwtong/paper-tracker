@@ -5,8 +5,30 @@
 <h1><%= @customer.name.titleize %></h1>
 
 <div class="row">
-  <%= render 'collections/quantity_by_type', quantity_by: :total %>
-  <%= render 'collections/quantity_by_type', quantity_by: :ecoloop if @customer.ecolooper? %>
+  <div class="col-4">
+    <h3><%= @customer.customer_type.capitalize %> Paper Collected</h3>
+    <table class="table">
+      <thead>
+        <th>Paper Type</th>
+        <th>A4</th>
+        <th>A3</th>
+      </thead>
+      <tbody>
+        <% PaperType.all.select(:name).distinct.pluck(:name).each do |name| %>
+        <tr>
+          <td><%= name.titleize %></td>
+          <% if @customer.offsetter? %>
+            <td><%= @customer.papers.offset_by_type(name, 'A4') %></td>
+            <td><%= @customer.papers.offset_by_type(name, 'A3') %></td>
+          <% elsif @customer.ecolooper? %>
+            <td><%= @customer.papers.ecoloop_by_type(name, 'A4') %></td>
+            <td><%= @customer.papers.ecoloop_by_type(name, 'A3') %></td>
+          <% end %>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 <%= link_to 'New Paper Collection', new_customer_collection_path(@customer), method: :get %><br/>
