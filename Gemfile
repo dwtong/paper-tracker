@@ -17,6 +17,8 @@ gem 'turbolinks', '~> 5'
 # Bootstrap styles
 gem 'bootstrap', '~> 4.0.0.alpha6'
 gem 'rails-assets-tether', '~> 1.1', '>= 1.1.1'
+# Icon font
+gem 'font-awesome-sass', '~> 4.7.0'
 
 group :development, :test do
   gem 'pry-rails'
