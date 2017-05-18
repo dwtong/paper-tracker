@@ -15,4 +15,8 @@ class Paper < ApplicationRecord
   def offset_quantity
     paper_transactions.where(ecoloop_stock: false).sum(:quantity)
   end
+
+  def customer_name_and_quantity
+    "#{self.customer.name} (#{offset_quantity})"
+  end
 end
