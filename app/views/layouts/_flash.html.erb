@@ -1,0 +1,11 @@
+<% if !flash.empty? %>
+  <% flash.each do |message_type, message| %>
+    <%= content_tag :div, class: "alert #{bootstrap_class_for(message_type)} alert-dismissible" do %>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <%= message %>
+    <% end %>
+  <% end %>
+  <% flash.clear %>
+<% end %>
