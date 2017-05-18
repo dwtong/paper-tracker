@@ -7,10 +7,13 @@ class OrdersController < ApplicationController
 
   def create
     @customer = Customer.find(params[:customer_id])
-    if @customer.orders.create(order_params)
+    @order = @customer.orders.new(order_params)
+    if @order.save
+      flash[:success] = "Order '#{@order.name}' created for #{@customer.name.titleize}."
       redirect_to customer_path(@customer)
     else
-      render plain: 'Oh no!'
+      flash.now[:error] = "Error: #{@order.errors.full_messages.join('. ')}."
+      render 'new'
     end
   end
 

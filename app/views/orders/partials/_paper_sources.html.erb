@@ -1,0 +1,30 @@
+<div class="paper-sources-panel mb-4">
+  <h5 class="mb-3"><%= "#{page.paper_type.label} - #{page.quantity} per book" %></h5>
+  <div class="row">
+    <div class="col-sm-9">
+
+      <div class="row">
+        <div class="col-sm-9">
+          <%= label_tag 'Source', nil %>
+        </div>
+        <div class="col-sm-3">
+          <%= label_tag 'Allocated', nil %>
+        </div>
+      </div>
+
+      <div>
+        <%= render 'orders/partials/paper_source', page: page %>
+        <%= button_tag 'Add Source', type: 'button', onclick: "addSource($(this), #{page.id})", class: 'btn btn-secondary btn-sm' %>
+      </div>
+    </div>
+    <div class="col-sm-3 text-center">
+      <h5>Left to Allocate</h5>
+      <h1>55</h1>
+    </div>
+  </div>
+
+</div>
+
+<div id="new-paper-source-<%= page.id %>" style="display:none;">
+  <%= render 'orders/partials/paper_source', page: page %>
+</div>

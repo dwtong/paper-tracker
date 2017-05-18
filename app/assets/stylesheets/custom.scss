@@ -3,6 +3,10 @@ h1 {
   font-size: 2.5rem;
 }
 
+.delete {
+  color: #c9302c;
+}
+
 .order-details-panel {
   background-color: #f26522;
   color: white;
@@ -13,21 +17,8 @@ h1 {
 .paper-sources-panel {
   background-color: #eceeef;
   padding: 1rem;
+}
 
-  table {
-    th:nth-child(1) {
-      width: 70%;
-    }
-    th:nth-child(2) {
-      width: 15%;
-    }
-    th:nth-child(3) {
-      width: 15%;
-    }
-
-    .delete {
-      padding-top: 0.3rem;
-      color: #c9302c;
-    }
-  }
+.paper-source {
+  margin-bottom: 0.3rem;
 }

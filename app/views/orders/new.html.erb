@@ -57,8 +57,9 @@
 
     <div class="col-8">
       <h2 class="mb-4">Paper Sources</h2>
-      <%= render 'paper_source' %>
-      <%= render 'paper_source' %>
+      <% @order.order_items.first.book.pages.each do |page| %>
+        <%= render 'orders/partials/paper_sources', page: page %>
+      <% end %>
       </div>
     </div>
 
