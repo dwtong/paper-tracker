@@ -43,7 +43,7 @@
           <div class="col-sm-5">
             <%= order.fields_for :order_items do |order_item| %>
               <%= order_item.hidden_field :book_id, class: 'form-control'  %>
-              <%= order_item.number_field :quantity, class: 'form-control'  %>
+              <%= order_item.number_field :quantity, class: 'form-control js-notebook-quantity', onkeyup: 'calculateLeftToAllocate()'  %>
             <% end %>
           </div>
         </div>
@@ -63,7 +63,6 @@
       </div>
     </div>
 
-    <%= order.button 'Submit to Order Hub', class: 'btn btn-success btn-lg mt-3 pull-right', data: { confirm: 'Are you sure you wish to submit this order? '} %>
-    <%= button_tag 'Cancel Order', class: 'btn btn-secondary btn-lg mt-3 mr-3 pull-right', data: { confirm: 'Are you sure you wish to cancel this order? '} %>
+    <%= order.button 'Submit to Order Hub', class: 'btn btn-success btn-lg mt-3 pull-right', disabled: true, data: { confirm: 'Are you sure you wish to submit this order? '} %>
   </div>
 <% end %>

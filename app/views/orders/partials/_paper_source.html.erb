@@ -1,9 +1,9 @@
 <div class="row paper-source">
   <div class="col-md-9">
-    <%= select_tag 'source[]', options_from_collection_for_select(paper_sources(page.paper_type), :first, :last), include_blank: "Choose source...", class: 'form-control form-control-sm' %>
+    <%= select_tag "[#{page.id}][source]", options_from_collection_for_select(paper_sources(page.paper_type), :first, :last), include_blank: "Choose source...", class: 'form-control form-control-sm' %>
   </div>
   <div class="col-md-2">
-    <%= number_field_tag 'source[1][]', nil, class: 'form-control form-control-sm' %>
+    <%= number_field_tag 'source', nil, class: 'form-control form-control-sm js-allocated-quantity', value: 0, onkeyup: 'calculateLeftToAllocate()' %>
   </div>
   <div class="col-md-1">
     <%= link_to 'javascript:', onclick: 'removeSource($(this))' do %>
