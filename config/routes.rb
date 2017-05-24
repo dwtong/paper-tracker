@@ -1,8 +1,18 @@
 Rails.application.routes.draw do
-  resources :customers do
-    resources :collections
-  end
+  devise_for :users, skip: [:registrations]
+  devise_scope :user do
+    authenticated :user do
+      root 'customers#index'
+      resources :customers do
+        resources :collections
+      end
 
-  resources :collections
-  resources :orders
+      resources :collections
+      resources :orders
+    end
+
+    unauthenticated do
+      root 'devise/sessions#new'
+    end
+  end
 end
